@@ -13,9 +13,9 @@ const Hero = () => {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
             </div>
 
-            <div className='container mx-auto flex flex-col lg:flex-row items-center gap-12 pt-32 pb-20 px-6'>
+            <div className='w-[90%] mx-auto flex flex-col lg:flex-row items-center gap-12 pt-28  pb-20 px-6'>
                 {/* Left Content */}
-                <motion.div className="flex-1 space-y-8 z-10">
+                <motion.div className="flex-1 space-y-4 z-10">
                     {/* Trust Badge */}
                     <motion.div
                         variants={fadeIn('right', 0.2)}
@@ -164,7 +164,7 @@ const Hero = () => {
                     <motion.div
                         animate={{ y: [0, 20, 0] }}
                         transition={{ duration: 4, repeat: Infinity, delay: 2 }}
-                        className="absolute -bottom-8 -left-8 glass-card rounded-2xl p-4 shadow-premium"
+                        className="absolute -bottom-0 -left-8 glass-card rounded-2xl p-4 shadow-premium"
                     >
                         <div className="flex items-center gap-3">
                             <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center text-white">
@@ -183,11 +183,11 @@ const Hero = () => {
 
             {/* Scroll Indicator */}
             <motion.div
-                animate={{ y: [0, 10, 0] }}
+                animate={{ y: [0, 6, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2"
+                className="absolute bottom-10 left-1/2 -translate-x-1/2"
             >
-                <div className="glass-card px-6 py-3 rounded-full flex items-center gap-2 cursor-pointer hover:shadow-lg transition-all">
+                <div className="glass-card hidden px-6 py-3 rounded-full md:flex items-center gap-2 cursor-pointer hover:shadow-lg transition-all">
                     <span className="text-sm font-medium text-gray-600">Scroll to explore</span>
                     <svg className="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />

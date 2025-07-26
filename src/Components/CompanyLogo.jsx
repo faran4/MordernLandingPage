@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import slack from "../assets/slack.png"
 import amazon from "../assets/amazon.png"
 import woocommerce from "../assets/woocommerce.png"
@@ -7,8 +7,51 @@ import sitepoint from "../assets/sitepoint.png"
 import { motion } from "motion/react"
 import { fadeIn } from "../utils/motion.js"
 
+// Counter animation hook with slower timing
+const useCounter = (end, duration = 4000, start = 0) => {
+    const [count, setCount] = useState(start);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        if (!isVisible) return;
+
+        let startTime;
+        let animationFrame;
+
+        const animate = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+
+            // Easing function for smooth animation
+            const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+            const currentCount = Math.floor(start + (end - start) * easeOutCubic);
+
+            setCount(currentCount);
+
+            if (progress < 1) {
+                animationFrame = requestAnimationFrame(animate);
+            }
+        };
+
+        animationFrame = requestAnimationFrame(animate);
+
+        return () => {
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+        };
+    }, [end, duration, start, isVisible]);
+
+    return [count, setIsVisible];
+};
+
 const CompanyLogo = () => {
     const logos = [slack, amazon, woocommerce, meunndies, sitepoint];
+
+    // Animated counters with slower, staggered timing
+    const [activeCompanies, setActiveCompaniesVisible] = useCounter(10000, 4000);
+    const [satisfactionRate, setSatisfactionVisible] = useCounter(98, 3500);
+    const [countriesServed, setCountriesVisible] = useCounter(150, 3800);
 
     return (
         <section className="relative py-20 overflow-hidden bg-gradient-to-b from-white to-violet-50/30">
@@ -72,28 +115,52 @@ const CompanyLogo = () => {
                     </motion.div>
                 </motion.div>
 
-                {/* Stats Section */}
+                {/* Animated Stats Section */}
                 <motion.div
                     variants={fadeIn("up", 0.5)}
                     initial="hidden"
                     whileInView="show"
+                    onViewportEnter={() => {
+                        // Stagger the counter starts for a more premium feel
+                        setTimeout(() => setActiveCompaniesVisible(true), 200);
+                        setTimeout(() => setSatisfactionVisible(true), 400);
+                        setTimeout(() => setCountriesVisible(true), 600);
+                    }}
                     className="mt-12 flex flex-wrap justify-center gap-8 sm:gap-16"
                 >
-                    {[
-                        { value: "10K+", label: "Active Companies" },
-                        { value: "98%", label: "Satisfaction Rate" },
-                        { value: "150+", label: "Countries Served" },
-                        { value: "24/7", label: "Premium Support" }
-                    ].map((stat, index) => (
-                        <motion.div
-                            key={index}
-                            variants={fadeIn("up", 0.1 * (index + 1))}
-                            className="text-center"
-                        >
-                            <p className="text-3xl font-bold text-gradient-premium">{stat.value}</p>
-                            <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
-                        </motion.div>
-                    ))}
+                    <motion.div
+                        variants={fadeIn("up", 0.1)}
+                        className="text-center"
+                    >
+                        <p className="text-3xl font-bold text-gradient-premium">
+                            {activeCompanies >= 1000 ? `${Math.floor(activeCompanies/1000)}K+` : `${activeCompanies}+`}
+                        </p>
+                        <p className="text-sm text-gray-600 mt-1">Active Companies</p>
+                    </motion.div>
+
+                    <motion.div
+                        variants={fadeIn("up", 0.2)}
+                        className="text-center"
+                    >
+                        <p className="text-3xl font-bold text-gradient-premium">{satisfactionRate}%</p>
+                        <p className="text-sm text-gray-600 mt-1">Satisfaction Rate</p>
+                    </motion.div>
+
+                    <motion.div
+                        variants={fadeIn("up", 0.3)}
+                        className="text-center"
+                    >
+                        <p className="text-3xl font-bold text-gradient-premium">{countriesServed}+</p>
+                        <p className="text-sm text-gray-600 mt-1">Countries Served</p>
+                    </motion.div>
+
+                    <motion.div
+                        variants={fadeIn("up", 0.4)}
+                        className="text-center"
+                    >
+                        <p className="text-3xl font-bold text-gradient-premium">24/7</p>
+                        <p className="text-sm text-gray-600 mt-1">Premium Support</p>
+                    </motion.div>
                 </motion.div>
             </div>
         </section>

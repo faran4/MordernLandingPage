@@ -27,7 +27,7 @@ const PurposeSection = () => {
     ];
 
     return (
-        <section className="relative py-24 overflow-hidden" id="about">
+        <section className="relative min-h-screen flex items-center overflow-hidden" id="about">
             {/* Premium background */}
             <div className="absolute inset-0 bg-gradient-to-br from-violet-50/50 via-white to-purple-50/50 -z-10"></div>
 
@@ -35,20 +35,20 @@ const PurposeSection = () => {
             <div className="absolute top-20 right-20 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
             <div className="absolute bottom-20 left-20 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
-            <div className='container mx-auto px-6 md:px-8'>
+            <div className='container mx-auto px-6 md:px-8 py-20'>
                 <motion.div
                     variants={fadeIn("up", 0.2)}
                     initial="hidden"
                     whileInView="show"
-                    className="grid lg:grid-cols-5 gap-12 items-start"
+                    className="grid lg:grid-cols-5 gap-12 xl:gap-16 items-center"
                 >
                     {/* Left heading section */}
                     <motion.div
                         variants={fadeIn("right", 0.3)}
-                        className="lg:col-span-2 space-y-6"
+                        className="lg:col-span-2 space-y-8"
                     >
                         <motion.div variants={fadeIn("up", 0.4)}>
-                            <span className="badge-premium inline-flex mb-4">
+                            <span className="badge-premium inline-flex mb-6">
                                 <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clipRule="evenodd" />
                                 </svg>
@@ -58,7 +58,7 @@ const PurposeSection = () => {
 
                         <motion.h2
                             variants={textVariant(0.5)}
-                            className="text-4xl lg:text-5xl font-black leading-tight"
+                            className="text-4xl lg:text-5xl xl:text-6xl font-black leading-tight"
                         >
                             <span className="text-gray-900">Purpose of a</span>
                             <br />
@@ -75,7 +75,7 @@ const PurposeSection = () => {
                             Together, we accelerate your journey to success with unified strategies and seamless execution.
                         </motion.p>
 
-                        {/* Premium CTA */}
+                        {/* Single Premium CTA */}
                         <motion.button
                             variants={fadeIn("up", 0.7)}
                             whileHover={{ scale: 1.05 }}
@@ -130,21 +130,6 @@ const PurposeSection = () => {
                             </motion.div>
                         ))}
                     </motion.div>
-                </motion.div>
-
-                {/* Bottom decorative element */}
-                <motion.div
-                    variants={fadeIn("up", 0.8)}
-                    initial="hidden"
-                    whileInView="show"
-                    className="mt-20 text-center"
-                >
-                    <div className="inline-flex items-center gap-4 glass-card px-8 py-4 rounded-full">
-                        <span className="text-sm font-medium text-gray-600">Ready to transform your business?</span>
-                        <button className="text-violet-600 font-semibold hover:text-violet-700 transition-colors">
-                            Get Started →
-                        </button>
-                    </div>
                 </motion.div>
             </div>
         </section>
